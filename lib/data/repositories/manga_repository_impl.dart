@@ -8,6 +8,7 @@ import 'package:read_manga/domain/entities/manga.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
 import 'package:read_manga/domain/entities/manga_recommend.dart';
 import 'package:read_manga/domain/entities/read_manga.dart';
+import 'package:read_manga/domain/entities/search.dart';
 import 'package:read_manga/domain/repositories/manga_repository.dart';
 
 class MangaRepositoryImpl implements MangaRepository {
@@ -55,6 +56,18 @@ class MangaRepositoryImpl implements MangaRepository {
   Future<Either<Failure, List<ReadManga>>> getReadManga(String id) async {
     try {
       final result = await remoteDataSource.getReadManga(id);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Search>>> getSearch(String query) async {
+    try {
+      final result = await remoteDataSource.getSearch(query);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure(''));

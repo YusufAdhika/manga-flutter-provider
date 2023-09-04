@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/state_enum.dart';
-import 'package:read_manga/presentation/notifier/manga_list_notifier.dart';
-import 'package:read_manga/presentation/pages/manga_detail_page.dart';
+import 'package:read_manga/presentation/provider/manga_list_notifier.dart';
 
 import '../../common/routes.dart';
 
@@ -31,7 +30,14 @@ class _MangaListPageState extends State<MangaListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Read Manga'),
-        actions: const [],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, searchManga);
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
       ),
       body: Consumer<MangaNotifier>(builder: (context, data, child) {
         final state = data.listMangaState;
@@ -44,9 +50,9 @@ class _MangaListPageState extends State<MangaListPage> {
             shrinkWrap: true,
             controller: scrollController,
             padding: const EdgeInsets.only(
-              top: 18,
-              left: 18,
-              right: 18,
+              top: 16,
+              left: 16,
+              right: 16,
             ),
             itemBuilder: (context, index) {
               final manga = data.listManga[index];

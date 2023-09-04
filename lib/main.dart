@@ -4,17 +4,19 @@ import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/routes.dart';
 import 'package:read_manga/common/utils.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
-import 'package:read_manga/presentation/notifier/manga_detail_notifier.dart';
-import 'package:read_manga/presentation/notifier/manga_list_notifier.dart';
-import 'package:read_manga/presentation/notifier/manga_list_recommended_nofier.dart';
-import 'package:read_manga/presentation/notifier/read_manga_notifier.dart';
+import 'package:read_manga/presentation/provider/manga_detail_notifier.dart';
+import 'package:read_manga/presentation/provider/manga_list_notifier.dart';
+import 'package:read_manga/presentation/provider/manga_list_recommended_nofier.dart';
+import 'package:read_manga/presentation/provider/read_manga_notifier.dart';
 import 'package:read_manga/presentation/pages/home_page.dart';
-import 'package:read_manga/presentation/pages/list_read_manga_pager.dart';
+import 'package:read_manga/presentation/pages/read_list_manga_pager.dart';
 import 'package:read_manga/presentation/pages/manga_detail_page.dart';
 import 'package:read_manga/presentation/pages/manga_list_page.dart';
 import 'package:read_manga/injection.dart' as di;
 import 'package:read_manga/presentation/pages/manga_recommended_page.dart';
 import 'package:read_manga/presentation/pages/read_manga_page.dart';
+import 'package:read_manga/presentation/pages/search_page.dart';
+import 'package:read_manga/presentation/provider/search_notifier.dart';
 
 void main() {
   di.init();
@@ -33,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MangaRecommendedNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<SearchNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MangaDetailNotifier>(),
@@ -62,6 +67,10 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => const MangaRecommendedPage(),
               );
+            case searchManga:
+              return MaterialPageRoute(
+                builder: (_) => const SearchMangaPage(),
+              );
             case detailMangaRoute:
               final id = settings.arguments as String;
               return MaterialPageRoute(
@@ -71,7 +80,7 @@ class MyApp extends StatelessWidget {
             case readListMangaRoute:
               final manga = settings.arguments as MangaDetail;
               return MaterialPageRoute(
-                builder: (_) => ListReadMangaPage(
+                builder: (_) => ReadListMangaPage(
                   manga: manga,
                 ),
               );

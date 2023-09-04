@@ -10,12 +10,15 @@ import 'package:read_manga/data/models/read_manga_model.dart';
 import 'package:read_manga/data/models/response/manga_read_response.dart';
 import 'package:read_manga/data/models/response/manga_recommended_response.dart';
 import 'package:read_manga/data/models/response/manga_response.dart';
+import 'package:read_manga/data/models/response/search_response.dart';
+import 'package:read_manga/data/models/search_model.dart';
 
 abstract class MangaRemoteDataSource {
   Future<List<MangaModel>> getManga(int page);
   Future<MangaDetailModel> getMangaDetail(String id);
   Future<List<MangaRecommendModel>> getMangaRecommend();
   Future<List<ReadMangaModel>> getReadManga(String id);
+  Future<List<SearchModel>> getSearch(String query);
 }
 
 class MangaRemoteDataSourceImpl implements MangaRemoteDataSource {
@@ -76,6 +79,19 @@ class MangaRemoteDataSourceImpl implements MangaRemoteDataSource {
           .readMangaModel;
     } else {
       log("error");
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<SearchModel>> getSearch(String query) async {
+    final response = await client.get(
+      Uri.parse('$url/search/$query'),
+    );
+
+    if (response.statusCode == 200) {
+      return SearchResponse.fromJson(json.decode(response.body)).searchList;
+    } else {
       throw ServerException();
     }
   }

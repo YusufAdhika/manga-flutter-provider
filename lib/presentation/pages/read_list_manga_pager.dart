@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
-import 'package:read_manga/presentation/pages/read_manga_page.dart';
 
 import '../../common/routes.dart';
 
-class ListReadMangaPage extends StatefulWidget {
-  const ListReadMangaPage({
+class ReadListMangaPage extends StatefulWidget {
+  const ReadListMangaPage({
     super.key,
     required this.manga,
   });
@@ -14,10 +13,10 @@ class ListReadMangaPage extends StatefulWidget {
   final MangaDetail manga;
 
   @override
-  State<ListReadMangaPage> createState() => _ListReadMangaPageState();
+  State<ReadListMangaPage> createState() => _ReadListMangaPageState();
 }
 
-class _ListReadMangaPageState extends State<ListReadMangaPage> {
+class _ReadListMangaPageState extends State<ReadListMangaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

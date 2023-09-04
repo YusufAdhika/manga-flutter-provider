@@ -4,9 +4,7 @@ import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/routes.dart';
 import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
-import 'package:read_manga/presentation/notifier/manga_detail_notifier.dart';
-import 'package:read_manga/presentation/pages/list_read_manga_pager.dart';
-import 'package:read_manga/presentation/pages/read_manga_page.dart';
+import 'package:read_manga/presentation/provider/manga_detail_notifier.dart';
 
 class MangaDetailPage extends StatefulWidget {
   final String id;

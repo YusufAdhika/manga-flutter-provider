@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/state_enum.dart';
-import 'package:read_manga/presentation/notifier/read_manga_notifier.dart';
+import 'package:read_manga/presentation/provider/read_manga_notifier.dart';
 
 class ReadMangaPage extends StatefulWidget {
   const ReadMangaPage({super.key, required this.id});

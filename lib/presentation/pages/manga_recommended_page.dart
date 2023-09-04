@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/state_enum.dart';
-import 'package:read_manga/presentation/notifier/manga_list_recommended_nofier.dart';
+import 'package:read_manga/presentation/provider/manga_list_recommended_nofier.dart';
 
 import '../../common/routes.dart';
 
