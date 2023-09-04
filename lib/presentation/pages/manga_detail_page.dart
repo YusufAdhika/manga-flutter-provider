@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
+import 'package:read_manga/common/routes.dart';
 import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
 import 'package:read_manga/presentation/notifier/manga_detail_notifier.dart';
@@ -8,8 +9,6 @@ import 'package:read_manga/presentation/pages/list_read_manga_pager.dart';
 import 'package:read_manga/presentation/pages/read_manga_page.dart';
 
 class MangaDetailPage extends StatefulWidget {
-  static const route = '/detail';
-
   final String id;
   const MangaDetailPage({super.key, required this.id});
 
@@ -184,7 +183,7 @@ class DetailContent extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          ListReadMangaPage.route,
+                          readListMangaRoute,
                           arguments: manga,
                         );
                       },
@@ -219,7 +218,7 @@ class DetailContent extends StatelessWidget {
                               onTap: () {
                                 Navigator.pushNamed(
                                   context,
-                                  ReadMangaPage.route,
+                                  readMangaRoute,
                                   arguments: data.chapterEndpoint,
                                 );
                               },

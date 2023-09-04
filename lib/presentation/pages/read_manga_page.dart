@@ -6,7 +6,6 @@ import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/presentation/notifier/read_manga_notifier.dart';
 
 class ReadMangaPage extends StatefulWidget {
-  static const route = 'chapter';
   const ReadMangaPage({super.key, required this.id});
 
   final String id;

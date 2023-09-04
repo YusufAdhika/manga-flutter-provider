@@ -6,8 +6,9 @@ import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/presentation/notifier/manga_list_notifier.dart';
 import 'package:read_manga/presentation/pages/manga_detail_page.dart';
 
+import '../../common/routes.dart';
+
 class MangaListPage extends StatefulWidget {
-  static const route = '/home-list';
   const MangaListPage({super.key});
 
   @override
@@ -30,7 +31,7 @@ class _MangaListPageState extends State<MangaListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Read Manga'),
-        actions: [],
+        actions: const [],
       ),
       body: Consumer<MangaNotifier>(builder: (context, data, child) {
         final state = data.listMangaState;
@@ -61,7 +62,7 @@ class _MangaListPageState extends State<MangaListPage> {
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      MangaDetailPage.route,
+                      detailMangaRoute,
                       arguments: manga.endpoint,
                     );
                   },

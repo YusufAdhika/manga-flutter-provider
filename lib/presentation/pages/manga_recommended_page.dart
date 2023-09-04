@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/presentation/notifier/manga_list_recommended_nofier.dart';
-import 'package:read_manga/presentation/pages/manga_detail_page.dart';
+
+import '../../common/routes.dart';
 
 class MangaRecommendedPage extends StatefulWidget {
-  static const route = '/recommended';
   const MangaRecommendedPage({super.key});
 
   @override
@@ -51,7 +51,7 @@ class _MangaRecommendedPageState extends State<MangaRecommendedPage> {
                         onTap: () {
                           Navigator.pushNamed(
                             context,
-                            MangaDetailPage.route,
+                            detailMangaRoute,
                             arguments: manga.endpoint,
                           );
                         },

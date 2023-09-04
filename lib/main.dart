@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
+import 'package:read_manga/common/routes.dart';
 import 'package:read_manga/common/utils.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
 import 'package:read_manga/presentation/notifier/manga_detail_notifier.dart';
@@ -53,28 +54,28 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case MangaListPage.route:
+            case listMangaRoute:
               return MaterialPageRoute(
                 builder: (_) => const MangaListPage(),
               );
-            case MangaRecommendedPage.route:
+            case listMangaRecommendRoute:
               return MaterialPageRoute(
                 builder: (_) => const MangaRecommendedPage(),
               );
-            case ListReadMangaPage.route:
+            case detailMangaRoute:
+              final id = settings.arguments as String;
+              return MaterialPageRoute(
+                builder: (_) => MangaDetailPage(id: id),
+                settings: settings,
+              );
+            case readListMangaRoute:
               final manga = settings.arguments as MangaDetail;
               return MaterialPageRoute(
                 builder: (_) => ListReadMangaPage(
                   manga: manga,
                 ),
               );
-            case MangaDetailPage.route:
-              final id = settings.arguments as String;
-              return MaterialPageRoute(
-                builder: (_) => MangaDetailPage(id: id),
-                settings: settings,
-              );
-            case ReadMangaPage.route:
+            case readMangaRoute:
               final id = settings.arguments as String;
               return MaterialPageRoute(
                 builder: (_) => ReadMangaPage(id: id),

@@ -3,8 +3,9 @@ import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
 import 'package:read_manga/presentation/pages/read_manga_page.dart';
 
+import '../../common/routes.dart';
+
 class ListReadMangaPage extends StatefulWidget {
-  static const route = '/list/chapter';
   const ListReadMangaPage({
     super.key,
     required this.manga,
@@ -73,7 +74,7 @@ class _ListReadMangaPageState extends State<ListReadMangaPage> {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                ReadMangaPage.route,
+                                readMangaRoute,
                                 arguments: data.chapterEndpoint,
                               );
                             },
