@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:read_manga/presentation/pages/info_page.dart';
 import 'package:read_manga/presentation/pages/manga_list_page.dart';
 import 'package:read_manga/presentation/pages/manga_recommended_page.dart';
+import 'package:read_manga/presentation/pages/saved_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,16 +16,16 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = const [
     BottomNavigationBarItem(
-      icon: Icon(Icons.refresh_outlined),
-      label: 'Latest',
+      icon: Icon(Icons.home_rounded),
+      label: 'Home',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.recommend_outlined),
-      label: 'Recommend',
+      icon: Icon(Icons.recommend),
+      label: 'Suggest',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.remove_red_eye),
-      label: 'Watchlist',
+      icon: Icon(Icons.bookmark_rounded),
+      label: 'Saved',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.info_outline),
@@ -32,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<Widget> _listWidget = [
-    MangaListPage(),
-    MangaRecommended(),
-    MangaListPage(),
-    MangaListPage(),
+    const MangaListPage(),
+    const MangaRecommendedPage(),
+    const SavedPage(),
+    const InfoPage(),
   ];
 
   void _onBottomNavTapped(int index) {

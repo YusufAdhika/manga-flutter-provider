@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:read_manga/common/constants.dart';
-// import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/utils.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
 import 'package:read_manga/presentation/notifier/manga_detail_notifier.dart';
@@ -32,10 +31,10 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MangaNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MangaDetailNotifier>(),
+          create: (_) => di.locator<MangaRecommendedNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MangaRecommendedNotifier>(),
+          create: (_) => di.locator<MangaDetailNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<ReadMangaNotifier>(),
@@ -58,9 +57,9 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => const MangaListPage(),
               );
-            case MangaRecommended.route:
+            case MangaRecommendedPage.route:
               return MaterialPageRoute(
-                builder: (_) => const MangaRecommended(),
+                builder: (_) => const MangaRecommendedPage(),
               );
             case ListReadMangaPage.route:
               final manga = settings.arguments as MangaDetail;

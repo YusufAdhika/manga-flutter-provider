@@ -8,8 +8,8 @@ import 'package:read_manga/presentation/pages/manga_detail_page.dart';
 
 class MangaListPage extends StatefulWidget {
   static const route = '/home-list';
-
   const MangaListPage({super.key});
+
   @override
   State<MangaListPage> createState() => _MangaListPageState();
 }
@@ -30,6 +30,7 @@ class _MangaListPageState extends State<MangaListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Read Manga'),
+        actions: [],
       ),
       body: Consumer<MangaNotifier>(builder: (context, data, child) {
         final state = data.listMangaState;

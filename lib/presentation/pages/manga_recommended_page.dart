@@ -6,15 +6,15 @@ import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/presentation/notifier/manga_list_recommended_nofier.dart';
 import 'package:read_manga/presentation/pages/manga_detail_page.dart';
 
-class MangaRecommended extends StatefulWidget {
+class MangaRecommendedPage extends StatefulWidget {
   static const route = '/recommended';
-  const MangaRecommended({super.key});
+  const MangaRecommendedPage({super.key});
 
   @override
-  State<MangaRecommended> createState() => _MangaRecommendedState();
+  State<MangaRecommendedPage> createState() => _MangaRecommendedPageState();
 }
 
-class _MangaRecommendedState extends State<MangaRecommended> {
+class _MangaRecommendedPageState extends State<MangaRecommendedPage> {
   @override
   void initState() {
     super.initState();
@@ -27,7 +27,7 @@ class _MangaRecommendedState extends State<MangaRecommended> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Read Manga'),
+        title: const Text('Manga Suggest'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -85,22 +85,6 @@ class _MangaRecommendedState extends State<MangaRecommended> {
                                     overflow: TextOverflow.ellipsis,
                                     style: kSubtitle,
                                   ),
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Text(
-                                  //       manga.type.toString(),
-                                  //       maxLines: 1,
-                                  //       style: kBodyText,
-                                  //     ),
-                                  //     Text(
-                                  //       manga.uploadOn.toString(),
-                                  //       maxLines: 1,
-                                  //       style: kBodyText,
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 ],
                               ),
                             ),
