@@ -12,4 +12,8 @@ abstract class MangaRepository {
   Future<Either<Failure, List<MangaRecommend>>> getMangaRecommend();
   Future<Either<Failure, List<ReadManga>>> getReadManga(String id);
   Future<Either<Failure, List<Search>>> getSearch(String query);
+  Future<Either<Failure, String>> saveBookmark(MangaDetail manga);
+  Future<Either<Failure, String>> removeBookmark(MangaDetail manga);
+  Future<bool> isAddedToBookmark(String id);
+  Future<Either<Failure, List<Manga>>> getListBookmark();
 }

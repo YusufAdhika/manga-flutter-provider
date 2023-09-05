@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:read_manga/common/state_enum.dart';
 import 'package:read_manga/domain/entities/search.dart';
@@ -26,14 +24,12 @@ class SearchNotifier extends ChangeNotifier {
     final result = await getSearch.execute(query);
     result.fold(
       (failure) {
-        log("failure " + failure.toString());
         _searchState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (searchData) {
         _searchState = RequestState.loaded;
-        log("search data $searchData");
         _listSearch = searchData;
         notifyListeners();
       },

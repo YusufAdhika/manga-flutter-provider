@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:read_manga/presentation/pages/info_page.dart';
 import 'package:read_manga/presentation/pages/manga_list_page.dart';
 import 'package:read_manga/presentation/pages/manga_recommended_page.dart';
-import 'package:read_manga/presentation/pages/saved_page.dart';
+import 'package:read_manga/presentation/pages/bookmark_manga_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.bookmark_rounded),
-      label: 'Saved',
+      label: 'Bookmark',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.info_outline),
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _listWidget = [
     const MangaListPage(),
     const MangaRecommendedPage(),
-    const SavedPage(),
+    const BookmarkPage(),
     const InfoPage(),
   ];
 

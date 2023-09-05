@@ -4,6 +4,7 @@ import 'package:read_manga/common/constants.dart';
 import 'package:read_manga/common/routes.dart';
 import 'package:read_manga/common/utils.dart';
 import 'package:read_manga/domain/entities/manga_detail.dart';
+import 'package:read_manga/presentation/provider/bookmark_manga_notifier.dart';
 import 'package:read_manga/presentation/provider/manga_detail_notifier.dart';
 import 'package:read_manga/presentation/provider/manga_list_notifier.dart';
 import 'package:read_manga/presentation/provider/manga_list_recommended_nofier.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<ReadMangaNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<BookmarkMangaNotifier>(),
         ),
       ],
       child: MaterialApp(

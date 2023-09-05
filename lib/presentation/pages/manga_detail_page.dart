@@ -36,7 +36,10 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
           } else if (provider.mangaDetailState == RequestState.loaded) {
             final mangaDetail = provider.listManga;
             return SafeArea(
-              child: DetailContent(mangaDetail),
+              child: DetailContent(
+                mangaDetail,
+                provider.isAddedToBookmark,
+              ),
             );
           } else {
             return Text(provider.message);
@@ -49,8 +52,9 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MangaDetail manga;
+  final bool isAddedBookmark;
 
-  const DetailContent(this.manga, {super.key});
+  const DetailContent(this.manga, this.isAddedBookmark, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +62,73 @@ class DetailContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: CircleAvatar(
-              backgroundColor: kRichBlack,
-              foregroundColor: Colors.white,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircleAvatar(
+                  backgroundColor: kRichBlack,
+                  foregroundColor: Colors.white,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  height: 45,
+                  width: 45,
+                  child: CircleAvatar(
+                    backgroundColor:
+                        isAddedBookmark ? kMikadoYellow : Colors.grey[800],
+                    child: IconButton(
+                      icon: Icon(
+                        isAddedBookmark ? Icons.bookmark : Icons.bookmark_add,
+                        color: isAddedBookmark ? Colors.black : Colors.white,
+                      ),
+                      onPressed: () async {
+                        if (!isAddedBookmark) {
+                          await Provider.of<MangaDetailNotifier>(context,
+                                  listen: false)
+                              .addBookmark(manga);
+                        } else {
+                          await Provider.of<MangaDetailNotifier>(context,
+                                  listen: false)
+                              .removedBookmark(manga);
+                        }
+
+                        final message = Provider.of<MangaDetailNotifier>(
+                                context,
+                                listen: false)
+                            .bookmarkMessage;
+
+                        if (message ==
+                                MangaDetailNotifier.bookmarkAddSuccessMessage ||
+                            message ==
+                                MangaDetailNotifier
+                                    .bookmarkRemoveSuccessMessage) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text(message)));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(message),
+                                );
+                              });
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -109,11 +168,7 @@ class DetailContent extends StatelessWidget {
                   height: 9,
                 ),
                 Text(
-                  "•  ${manga.type}  •  ${manga.status}",
-                  style: kBodyText,
-                ),
-                Text(
-                  "•  Author by ${manga.author}",
+                  "•  ${manga.type}  •  ${manga.status}  •  Author by ${manga.author}  • ",
                   style: kBodyText,
                 ),
                 const SizedBox(
@@ -235,6 +290,37 @@ class DetailContent extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class BookmarkButton extends StatelessWidget {
+  const BookmarkButton({
+    Key? key,
+    required this.isAddedBookmark,
+    required this.manga,
+  }) : super(key: key);
+
+  final bool isAddedBookmark;
+  final MangaDetail manga;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () async {},
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blue, // Customize the button color as needed
+        ),
+        padding: const EdgeInsets.all(12), // Adjust the padding as needed
+        child: Center(
+          child: Icon(
+            isAddedBookmark ? Icons.check : Icons.add,
+            color: Colors.white, // Customize the icon color as needed
+          ),
+        ),
       ),
     );
   }
